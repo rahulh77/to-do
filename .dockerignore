@@ -1,0 +1,7 @@
+.git
+.idea
+.venv
+.vscode
+test
+__pycache__
+README.md

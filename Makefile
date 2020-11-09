@@ -20,13 +20,13 @@ clean:
 	find . -type f -name '*.pyc' -delete
 
 build:
-    @docker build -t $(app_name) .
+	@docker build -t $(app_name) . 
 
 run:
-    docker run --detach -p 5000:5000 $(app_name)
+	@docker run --detach -p 5000:5000 --env MONGO_CONN_STR --name $(app_name) $(app_name)
 
 kill:
-    @echo 'Killing container...'
-    @docker ps | grep $(app_name) | awk '{print $$1}' | xargs docker
+	@echo 'Killing container...'
+	@docker ps | grep $(app_name) | awk '{print $$1}' | xargs docker rm -f
 
 .PHONY: init venv run clean
