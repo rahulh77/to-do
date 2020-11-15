@@ -24,6 +24,7 @@ RUN pip3 install gunicorn
 ENV PYTHONPATH "${PYTHONPATH}:/usr/lib/python3.9"
 
 COPY . /app
+COPY gunicorn_config.py /app
 COPY start.sh /app
 WORKDIR /app
 

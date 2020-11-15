@@ -4,11 +4,12 @@ from .controller.foo import foo
 from .controller.todo import todo
 from .controller.health import health
 from .config import Config
-# from app import error_handlers
+from .metrics import metrics
 
 app = Flask("todo_flask")
 # dashboard.bind(app)
 # dashboard.config.init_from()
+metrics.init_metrics(app)
 
 
 app.config.from_object(Config())
