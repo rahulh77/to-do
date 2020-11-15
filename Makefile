@@ -27,6 +27,7 @@ run:
 
 kill:
 	@echo 'Killing container...'
-	@docker ps | grep $(app_name) | awk '{print $$1}' | xargs docker rm -f
+	@docker rm -f $(app_name)
+# @docker ps | grep $(app_name) | awk '{print $1}' | xargs docker rm -f
 
 .PHONY: init venv run clean
