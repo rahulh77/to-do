@@ -12,8 +12,6 @@ $(VENV)/bin/activate: requirements.txt
 # venv is a shortcut target
 venv: $(VENV)/bin/activate
 
-run: venv
-	./$(VENV)/bin/python3 app.py
 
 clean:
 	rm -rf $(VENV)
