@@ -2,8 +2,7 @@ from datetime import datetime
 from flask import Blueprint, request, jsonify, Response
 from bson import json_util
 from ..repository.tododb import TodoDB
-from flask import current_app
-import json
+from flask import current_app as app
 
 todo = Blueprint('todo', __name__)
 
@@ -11,7 +10,7 @@ todo = Blueprint('todo', __name__)
 # index route, shows index.html view
 @todo.route('/')
 def index():
-    current_app.logger.debug("From root endpoint")
+    app.logger.info("From root endpoint")
     return "baz"
 
 @todo.route('/todo', methods=['GET'])
@@ -22,7 +21,7 @@ def getall():
     for doc in result:
         doc['_id'] = str(doc['_id']) 
         data.append(doc)
-    current_app.logger.debug("From /todo endpoint")
+    app.logger.debug("From /todo endpoint")
     return jsonify(data)
     # return Response(json.dumps(result,default=str),mimetype="application/json")
     # return json.loads(json_util.dumps(result))
@@ -33,5 +32,5 @@ def post_todo():
     item['created_on'] = datetime.now()
     tododb = TodoDB()
     result = tododb.insert(item)
-    print(result.inserted_id)
+    app.logger.info(result.inserted_id)
     return jsonify({'id': str(result.inserted_id)})
