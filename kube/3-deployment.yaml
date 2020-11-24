@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: todo
+  name: todo
+  namespace: todo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: todo
+    spec:
+      terminationGracePeriodSeconds: 60
+      restartPolicy: Always
+      containers:
+      - image: todo_flask:latest
+        name: todo
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
+        envFrom:
+        - configMapRef:
+            name: todo-config
+        - secretRef:
+            name: todo-secret
+        imagePullPolicy: Never
+status: {}

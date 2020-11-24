@@ -1,0 +1,19 @@
+# https://github.com/kubernetes/ingress-nginx/
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-todo
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: ingress-todo.info
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-svc
+                port:
+                  number: 8080

@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  LOG_LEVEL: DEBUG
+  MONGO_COLLECTION: todo
+  MONGO_DB: tododb
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: todo-config
+  namespace: todo
