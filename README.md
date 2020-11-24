@@ -36,6 +36,12 @@ wrk -c100 -d10s http://localhost:5001/todo
 WORKER TIMEOUT - add --timeout 90
 kubectl run curl-debug --rm -i --tty --restart=Never --image=radial/busyboxplus:curl -- /bin/sh
 
+NodePort
+Access using docker desktop
+If workers are timing out, it may take a while to appear
+localhost:<nodeport>
+or <en0 ip>:<nodeport>
+
 ## NGINX Ingress Controller
 ### will create some resources in ingress-nginx namespace
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
@@ -51,3 +57,6 @@ imagePullPolicy: Never
 minikube tunnel
 kubectl get svc # run this on other terminal window. will get you external ip
 <EXTERNAL_IP>:8080
+
+Always use multiple threads
+Try to use less workers (workers are more resource intensive)

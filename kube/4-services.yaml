@@ -5,6 +5,7 @@ metadata:
   labels:
     app: todo
   name: todo-svc
+  namespace: todo
 spec:
   ports:
   - port: 8080
