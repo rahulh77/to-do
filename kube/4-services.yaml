@@ -4,11 +4,14 @@ metadata:
   creationTimestamp: null
   labels:
     app: todo
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '5000'
   name: todo-svc
   namespace: todo
 spec:
   ports:
-  - port: 8080
+  - port: 5000
     # nodePort: 30080
     targetPort: 5000
   selector:
