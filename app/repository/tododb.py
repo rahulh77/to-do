@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 # from ..config import Config as CONFIG
 from flask import current_app
+from bson import ObjectId # For ObjectId to work   
+import pprint 
 
 
 class TodoDB(object):
@@ -17,3 +19,19 @@ class TodoDB(object):
     # Get operation
     def getAll(self):
         return self._mycoll.find()
+
+    # @app.route('/star/', methods=['GET'])
+    def get(self, name):
+        item = self._mycoll.find_one({'name': name})
+        result = None
+        if item:
+            result = item
+        return result
+
+    def remove(self, name):
+        #Deleting a Task with various references     
+        # item = self._mycoll.find_one({'name': name})
+        # pprint.pprint(item)
+        # print(item)
+        result = self._mycoll.delete_many({'name': name})
+        return result
