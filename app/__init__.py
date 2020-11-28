@@ -6,22 +6,11 @@ from .controller.todo import todo
 from .controller.health import health
 from .config import Config
 from .metrics import metrics
-from flask.json import JSONEncoder
+from .helper import CustomJSONEncoder
 
-from bson import json_util, ObjectId
-import datetime
-
-
-
-class CustomJSONEncoder(JSONEncoder):
-    def default(self, obj): 
-        if isinstance(obj, datetime.datetime) or isinstance(obj,datetime.date):
-            return obj.isoformat()
-        if isinstance(obj, ObjectId):
-            return str(obj)
-        return json_util.default(obj)
 
 app = Flask("todo_flask")
+from .globalhandlers import bp as gh_bp
 # dashboard.bind(app)
 # dashboard.config.init_from()
 metrics.init_metrics(app)
@@ -36,8 +25,8 @@ app.logger.info("from app logger")
 
 print(app.config)
 
-from .errors import bp as errors_bp
-app.register_blueprint(errors_bp)
+
+app.register_blueprint(gh_bp)
 app.register_blueprint(foo)
 app.register_blueprint(todo)
 app.register_blueprint(health)

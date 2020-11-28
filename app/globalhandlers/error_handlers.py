@@ -1,6 +1,6 @@
 from app import app
 from flask import Response, request, current_app
-from app.errors import bp
+from app.globalhandlers import bp
 
 
 @bp.app_errorhandler(404)
