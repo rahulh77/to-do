@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 load_dotenv(verbose=True)
 
 class Config(object):
-    # LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
-    # DEBUG = True
+    LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO")
+    DEBUG = True if LOG_LEVEL == "DEBUG" else False
     # DEVELOPMENT = True
     # ENV = 'development'
     # TESTING = True
