@@ -3,6 +3,7 @@
 .idea/
 __pycache__
 .vscode/launch.json
+.DS_Store
 tmp/
 *.env
 *secret*

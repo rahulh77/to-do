@@ -12,6 +12,10 @@ $(VENV)/bin/activate: requirements.txt
 # venv is a shortcut target
 venv: $(VENV)/bin/activate
 
+test:
+	rm -rf ./tmp/*
+	python -m pytest -v
+	pytest --cov-report term-missing --cov='./app'
 
 clean:
 	rm -rf $(VENV)
@@ -28,4 +32,4 @@ kill:
 	@docker rm -f $(app_name)
 # @docker ps | grep $(app_name) | awk '{print $1}' | xargs docker rm -f
 
-.PHONY: init venv run clean
+.PHONY: init venv test run clean
